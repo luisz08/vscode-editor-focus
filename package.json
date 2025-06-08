@@ -3,6 +3,8 @@
   "displayName": "Editor Focus",
   "description": "Hide all panel and focus to editor",
   "version": "0.0.1",
+  "publisher": "luis-zhao",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/luisz08/vscode-editor-focus.git"

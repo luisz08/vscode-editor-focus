@@ -1,71 +1,68 @@
-# editor-focus README
+# Editor Focus Extension
 
-This is the README for your extension "editor-focus". After writing up a brief description, we recommend including the following sections.
+A Visual Studio Code extension that provides a distraction-free coding environment by hiding panels and sidebars with simple commands.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Focus Mode**: Hide all VS Code panels and sidebars to maximize editor space
+- **Configurable**: Choose which UI elements to hide (sidebar, panel, activity bar, status bar)
+- **Per-Workspace**: Settings are saved per workspace/project
+- **Quick Toggle**: Fast keyboard shortcuts for instant focus mode switching
 
-For example if there is an image subfolder under your extension project workspace:
+## Commands
 
-\!\[feature X\]\(images/feature-x.png\)
+- `Editor Focus: Enter Focus Mode` - Hide configured panels and enter focus mode
+- `Editor Focus: Exit Focus Mode` - Restore panels to their previous state
+- `Editor Focus: Toggle Focus Mode` - Switch between focus and normal modes
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Default Keyboard Shortcuts
+
+- `Ctrl+Shift+F` (Windows/Linux) / `Cmd+Shift+F` (Mac) - Toggle Focus Mode
+- `Ctrl+Shift+Escape` (Windows/Linux) / `Cmd+Shift+Escape` (Mac) - Exit Focus Mode
+
+## Configuration
+
+You can customize which UI elements are hidden in focus mode:
+
+```json
+{
+  "editor-focus.hideSidebar": true,
+  "editor-focus.hidePanel": true,
+  "editor-focus.hideActivityBar": true,
+  "editor-focus.hideStatusBar": true
+}
+```
+
+## Usage
+
+1. **Using Command Palette**: Press `Ctrl+Shift+P` and type "Focus Mode"
+2. **Using Keyboard Shortcuts**: Press `Ctrl+Shift+F` to toggle focus mode
+3. **Configuration**: Go to VS Code Settings and search for "editor-focus"
+
+## How It Works
+
+- When entering focus mode, the extension saves the current state of all panels
+- Panels are hidden according to your configuration settings
+- When exiting focus mode, panels are restored to their exact previous state
+- Each workspace maintains its own panel state independently
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Visual Studio Code 1.100.0 or higher
 
-## Extension Settings
+## Installation
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+1. Install the extension from the VS Code Marketplace
+2. Use the command palette or keyboard shortcuts to start focusing!
 
-For example:
+## Development
 
-This extension contributes the following settings:
+This extension is built with:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- TypeScript
+- VS Code Extension API
+- ESBuild for bundling
 
-## Known Issues
+## License
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[MIT License](LICENSE)

@@ -3,19 +3,69 @@
   "displayName": "Editor Focus",
   "description": "Hide all panel and focus to editor",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luisz08/vscode-editor-focus.git"
+  },
+  "homepage": "https://github.com/luisz08/vscode-editor-focus#readme",
+  "bugs": {
+    "url": "https://github.com/luisz08/vscode-editor-focus/issues"
+  },
   "engines": {
     "vscode": "^1.100.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Editor Focus",
+      "properties": {
+        "editor-focus.hideSidebar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hide sidebar when entering focus mode"
+        },
+        "editor-focus.hidePanel": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hide bottom panel when entering focus mode"
+        },
+        "editor-focus.hideActivityBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hide activity bar when entering focus mode"
+        },
+        "editor-focus.hideStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hide status bar when entering focus mode"
+        }
+      }
+    },
     "commands": [
       {
-        "command": "editor-focus.helloWorld",
-        "title": "Hello World"
+        "command": "editor-focus.enterFocusMode",
+        "title": "Enter Focus Mode",
+        "category": "Editor Focus"
+      },
+      {
+        "command": "editor-focus.exitFocusMode",
+        "title": "Exit Focus Mode",
+        "category": "Editor Focus"
+      },
+      {
+        "command": "editor-focus.toggleFocusMode",
+        "title": "Toggle Focus Mode",
+        "category": "Editor Focus"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "editor-focus.toggleFocusMode",
+        "key": "ctrl+y",
+        "mac": "cmd+y"
       }
     ]
   },

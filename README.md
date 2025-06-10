@@ -22,6 +22,8 @@ A Visual Studio Code extension that provides a distraction-free coding environme
 
 ## Configuration
 
+### Panel Hiding Options
+
 You can customize which UI elements are hidden in focus mode:
 
 ```json
@@ -33,6 +35,27 @@ You can customize which UI elements are hidden in focus mode:
 }
 ```
 
+### Default State Configuration
+
+Configure the assumed default visibility of UI elements for accurate state restoration:
+
+```json
+{
+  "editor-focus.defaultSidebarVisible": true,
+  "editor-focus.defaultPanelVisible": true,
+  "editor-focus.defaultActivityBarVisible": true,
+  "editor-focus.defaultStatusBarVisible": true
+}
+```
+
+These settings help the extension know what state to restore when exiting focus mode. Set these to match your typical VS Code setup:
+
+- If you usually keep the panel visible, set `defaultPanelVisible` to `true`
+- If you typically hide the sidebar, set `defaultSidebarVisible` to `false`
+- Adjust other settings based on your preferences
+
+The extension will use these values as the baseline for restoring your workspace when exiting focus mode.
+
 ## Usage
 
 1. **Using Command Palette**: Press `Ctrl+Shift+P` and type "Focus Mode"
@@ -41,10 +64,13 @@ You can customize which UI elements are hidden in focus mode:
 
 ## How It Works
 
-- When entering focus mode, the extension saves the current state of all panels
-- Panels are hidden according to your configuration settings
-- When exiting focus mode, panels are restored to their exact previous state
+- When entering focus mode, the extension uses your configured default state assumptions to save the current panel states
+- Panels are hidden according to your hide configuration settings
+- When exiting focus mode, panels are restored based on the saved default states
 - Each workspace maintains its own panel state independently
+- The extension relies on your default state configuration to accurately restore your preferred layout
+
+**Note**: Since VS Code doesn't provide direct APIs to query panel visibility, the extension uses your configured default states as assumptions. Make sure to set the default state configuration to match your typical VS Code setup for the best experience.
 
 ## Requirements
 

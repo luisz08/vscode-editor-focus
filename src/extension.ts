@@ -19,7 +19,15 @@ interface FocusConfiguration {
   hideStatusBar: boolean;
 }
 
-// Utility functions for panel state management
+// Default state configuration interface
+interface DefaultStatesConfiguration {
+  defaultSidebarVisible: boolean;
+  defaultPanelVisible: boolean;
+  defaultActivityBarVisible: boolean;
+  defaultStatusBarVisible: boolean;
+}
+
+// Simplified panel state manager
 class PanelStateManager {
   private context: vscode.ExtensionContext;
   private static readonly STATE_KEY = "editor-focus.panelStates";
@@ -28,7 +36,7 @@ class PanelStateManager {
     this.context = context;
   }
 
-  // Get current extension configuration
+  // Get current extension configuration for hiding panels
   private getConfiguration(): FocusConfiguration {
     const config = vscode.workspace.getConfiguration("editor-focus");
     return {
@@ -39,12 +47,22 @@ class PanelStateManager {
     };
   }
 
-  // Save current panel states to workspace
+  // Get default states configuration
+  private getDefaultStates(): DefaultStatesConfiguration {
+    const config = vscode.workspace.getConfiguration("editor-focus");
+    return {
+      defaultSidebarVisible: config.get("defaultSidebarVisible", true),
+      defaultPanelVisible: config.get("defaultPanelVisible", true),
+      defaultActivityBarVisible: config.get("defaultActivityBarVisible", true),
+      defaultStatusBarVisible: config.get("defaultStatusBarVisible", true),
+    };
+  }
+
+  // Save current panel states to workspace using configured defaults
   async saveCurrentStates(): Promise<void> {
     try {
-      // Since VS Code doesn't provide direct visibility API, we use reasonable defaults
-      // and rely on consistent command usage for state tracking
       const existingStates = this.getSavedStates();
+      const defaultStates = this.getDefaultStates();
 
       // If states already exist and we're not in focus mode, preserve the saved before-focus states
       // If we're currently in focus mode, don't overwrite the original states
@@ -52,10 +70,10 @@ class PanelStateManager {
         beforeFocus: existingStates?.currentlyInFocusMode
           ? existingStates.beforeFocus // Preserve original states if already in focus mode
           : {
-              sidebarVisible: true, // Default assumption - user likely has sidebar visible
-              panelVisible: false, // Default assumption - panel usually hidden
-              activityBarVisible: true, // Default assumption - activity bar usually visible
-              statusBarVisible: true, // Default assumption - status bar usually visible
+              sidebarVisible: defaultStates.defaultSidebarVisible,
+              panelVisible: defaultStates.defaultPanelVisible,
+              activityBarVisible: defaultStates.defaultActivityBarVisible,
+              statusBarVisible: defaultStates.defaultStatusBarVisible,
             },
         currentlyInFocusMode: false,
       };
@@ -115,14 +133,12 @@ class PanelStateManager {
       }
       if (config.hideActivityBar) {
         // Activity bar doesn't have a direct hide command, use toggle carefully
-        // This is a limitation - we'll use toggle and track state
         await vscode.commands.executeCommand(
           "workbench.action.toggleActivityBarVisibility"
         );
       }
       if (config.hideStatusBar) {
         // Status bar doesn't have a direct hide command, use toggle carefully
-        // This is a limitation - we'll use toggle and track state
         await vscode.commands.executeCommand(
           "workbench.action.toggleStatusbarVisibility"
         );

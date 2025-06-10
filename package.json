@@ -2,7 +2,7 @@
   "name": "editor-focus",
   "displayName": "Editor Focus",
   "description": "Hide all panel and focus to editor",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "publisher": "luis-zhao",
   "license": "MIT",
   "repository": {
@@ -43,6 +43,26 @@
           "type": "boolean",
           "default": true,
           "description": "Hide status bar when entering focus mode"
+        },
+        "editor-focus.defaultSidebarVisible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Assume sidebar is visible by default (used for restoring state)"
+        },
+        "editor-focus.defaultPanelVisible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Assume panel is visible by default (used for restoring state)"
+        },
+        "editor-focus.defaultActivityBarVisible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Assume activity bar is visible by default (used for restoring state)"
+        },
+        "editor-focus.defaultStatusBarVisible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Assume status bar is visible by default (used for restoring state)"
         }
       }
     },
